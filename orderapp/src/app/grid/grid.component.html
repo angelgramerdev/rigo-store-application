@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="alert alert-primary" role="alert">
+    Add producst to your orders
+  </div>
+  <div class="form-group">
+    Select product: 
+<select [(ngModel)]="productId" (ngModelChange)="productSelected($event)">
+  <option></option>
+  <option *ngFor="let product of products" [ngValue]="product.id">{{product.name}}, {{product.reference}}, {{product.price}}</option>
+</select>
+<button type="submit" (click)="addProductToOrder()" class="btn btn-success">Add product to the order</button>&nbsp;&nbsp;
+<div class="form-group">
+  <label for="name">Order number</label>
+  <input type="text" name="name" [(ngModel)]="orderId"  class="form-control" id="orderid">          
+</div>
+
+  </div>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Order number</th>
+            <th scope="col">Identification</th>
+            <th scope="col">Name</th>
+            <th scope="col">Delivery address</th>
+            <th scope="col">Total</th>
+            <th scope="col">Creation Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">      
+            <td>{{order.id}}</td>
+            <td>{{order.identification}}</td>
+            <td>{{order.name}}</td>
+            <td>{{order.deliveryAddress}}</td>
+            <td>{{order.total}}</td>
+            <td>{{order.creationDate | date}}</td>
+            <td>
+              <button type="button" (click)="goToEdit(order.id)" class="btn btn-success">Edit</button>
+              <button type="button" (click)="erase(order.id)" class="btn btn-success">Delete</button>
+              <button type="button" (click)="getOrderProducts(order.id)" class="btn btn-success">Order products</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="">Go to the main page</a> 
+      <div class="popup" id="myForm" *ngIf="isOpen">
+        <ul>
+          <li style="list-style-type: none;border-radius: 50px;" *ngFor="let p of orderProducts">{{p.name}}-{{p.price}}</li>
+        </ul>      
+        <button type="button" class="btn btn-success" (click)="closePopUp()">Close</button>     
+      </div>
+  </div>
+
+

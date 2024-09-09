@@ -1,0 +1,11 @@
+.popup {
+    position:absolute;
+    display: inline-block;
+    z-index: 1;
+    top: 20px;
+    left: 50%;
+    cursor: pointer;
+    background:#CDCDCD;
+    width: 500px;
+    height: auto;
+  }
